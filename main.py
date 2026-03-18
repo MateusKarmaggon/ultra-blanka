@@ -9,7 +9,7 @@ app = FastAPI()
 def read_root():
     return {"message": "sua resposta"}
 
-@app.get("/etset")
+@app.get("/teste")
 def read_teste():
     return {"numero": random.randint(0, 100)}
 
