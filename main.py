@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 
+import random
+
 app = FastAPI()
 
 
@@ -7,8 +9,8 @@ app = FastAPI()
 def read_root():
     return {"message": "sua resposta"}
 
-@app.get("/teste")
+@app.get("/etset")
 def read_teste():
-    return {"message": "Bom dia, boa tarde, boa noite!"}
+    return {"numero": random.randint(0, 100)}
 
 
