@@ -1,16 +1,34 @@
 name: Continuous Integration Workflow
+
 on:
   pull_request:
     branches:
       - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v5
 
-      - name: Python Lint Code Scanning Action
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+
+      - name: Instalar dependências
+        run: |
+          pip install -r requirements.txt
+
+      - name: Ajustar PYTHONPATH  
+        run: echo "PYTHONPATH=$PWD" >> $GITHUB_ENV
+
+      - name: Rodar testes
+        run: pytest
+
+      - name: Rodar lint (pylint)
         uses: advanced-security/python-lint-code-scanning-action@v1.1.3
         with:
           linter: pylint
